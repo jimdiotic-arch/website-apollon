@@ -1,3 +1,4 @@
+import { Globe } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import StoreBadges from '../components/StoreBadges';
@@ -48,8 +49,12 @@ export default function GetApp() {
           σκανάρισε το QR στην αρχική σελίδα.
         </p>
       )}
+      <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-violet-400/30 bg-violet-500/10 px-3 py-1.5 text-xs font-medium text-violet-200">
+        <Globe className="h-3.5 w-3.5" aria-hidden="true" />
+        Web app · Σύντομα
+      </div>
       <div className="mt-8">
-        <StoreBadges />
+        <StoreBadges showWebSoon={false} />
       </div>
       <Link to="/" className="mt-10 text-sm text-violet-300 hover:text-white">
         ← Επιστροφή στην αρχική

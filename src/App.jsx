@@ -12,11 +12,21 @@ import LegalPage from './pages/LegalPage';
 import NotFound from './pages/NotFound';
 import { SUPPORT_EMAIL } from './config';
 
-function ScrollToTop() {
-  const { pathname } = useLocation();
+function ScrollManager() {
+  const { pathname, hash } = useLocation();
+
   useEffect(() => {
+    if (hash) {
+      const id = hash.replace('#', '');
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        return;
+      }
+    }
     window.scrollTo(0, 0);
-  }, [pathname]);
+  }, [pathname, hash]);
+
   return null;
 }
 
@@ -30,7 +40,7 @@ function DeletionCta() {
       </p>
       <a
         href={mailto}
-        className="mt-4 inline-flex rounded-lg bg-violet-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-violet-500"
+        className="mt-4 inline-flex rounded-xl bg-violet-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-violet-500"
       >
         Αίτημα διαγραφής via email
       </a>
@@ -41,11 +51,17 @@ function DeletionCta() {
 export default function App() {
   return (
     <BrowserRouter>
-      <ScrollToTop />
+      <ScrollManager />
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-violet-600 focus:px-4 focus:py-2 focus:text-sm focus:text-white"
+      >
+        Μετάβαση στο περιεχόμενο
+      </a>
       <div className="relative flex min-h-dvh flex-col overflow-x-hidden bg-slate-950">
         <AmbientBackground />
         <Header />
-        <div className="relative z-10 flex flex-1 flex-col">
+        <div id="main" className="relative z-10 flex flex-1 flex-col">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/privacy" element={<LegalPage content={privacyPolicyContent} />} />

@@ -48,7 +48,7 @@ function ContentBlock({ content }) {
 
 export default function LegalLayout({ title, lastUpdated, sections, extra }) {
   return (
-    <main className="relative z-10 mx-auto w-full max-w-3xl px-4 py-10 sm:py-14">
+    <main className="relative z-10 mx-auto w-full max-w-3xl px-4 py-10 sm:px-6 sm:py-14">
       <nav className="mb-8 flex flex-wrap gap-x-4 gap-y-2 text-sm text-violet-300" aria-label="Νομικές σελίδες">
         <Link to="/privacy" className="hover:text-white">
           Πολιτική Απορρήτου

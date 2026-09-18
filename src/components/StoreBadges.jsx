@@ -1,3 +1,4 @@
+import { Globe } from 'lucide-react';
 import { APP_STORE_URL, PLAY_STORE_URL, hasAppStore, hasPlayStore } from '../config';
 
 function BadgeLink({ href, enabled, children, label }) {
@@ -25,7 +26,26 @@ function BadgeLink({ href, enabled, children, label }) {
   );
 }
 
-export default function StoreBadges({ showComingSoon = true }) {
+function WebSoonBadge() {
+  return (
+    <span
+      className="inline-flex h-12 items-center gap-2.5 rounded-xl border border-white/12 bg-white/5 px-3.5"
+      aria-label="Web εφαρμογή — Σύντομα διαθέσιμη"
+    >
+      <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-violet-500/15 text-violet-200">
+        <Globe className="h-4 w-4" aria-hidden="true" />
+      </span>
+      <span className="text-left leading-tight">
+        <span className="block text-[10px] font-semibold uppercase tracking-wider text-slate-400">
+          Web app
+        </span>
+        <span className="block text-sm font-semibold text-white">Σύντομα</span>
+      </span>
+    </span>
+  );
+}
+
+export default function StoreBadges({ showComingSoon = true, showWebSoon = true }) {
   const comingSoon = !hasAppStore || !hasPlayStore;
 
   return (
@@ -45,6 +65,7 @@ export default function StoreBadges({ showComingSoon = true }) {
             className="h-[60px] w-auto"
           />
         </BadgeLink>
+        {showWebSoon && <WebSoonBadge />}
       </div>
       {showComingSoon && comingSoon && (
         <p className="text-xs font-medium uppercase tracking-wider text-violet-300/90">
